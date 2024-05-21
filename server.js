@@ -41,12 +41,12 @@ io.on("connection", (socket) => {
 require('./config/connect'); // Assurez-vous que le chemin est correct
 const repairagent = require('./routes/repairAgent');
 const service = require('./routes/repairService');
-
+const phone =require('./routes/phone');
 app.use(cors());
 app.use(express.json());
 app.use('/repairAgent', repairagent);
 app.use('/service', service);
-
+app.use('/phone',phone);
 const PORT = process.env.PORT || 3001;
 http.listen(PORT, () => {
     console.log(`Le serveur fonctionne sur le port ${PORT}`);
