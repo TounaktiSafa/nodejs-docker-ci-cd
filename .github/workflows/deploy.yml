@@ -33,5 +33,6 @@ jobs:
       - name: Pull and Deploy
         run: |
            docker pull ${{ secrets.DOCKER_USERNAME }}/nodejs-app:latest
-           docker compose down  # Changed from docker-compose
+           docker compose down  
+           working-directory: ./pfaBackend
            docker compose up -d --build  # Changed from docker-compose
