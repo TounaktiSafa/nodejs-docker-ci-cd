@@ -25,7 +25,7 @@ jobs:
     needs: build-and-push
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4  # Critical - brings compose file
+      - uses: actions/checkout@v4
 
       - name: Verify Files
         run: ls -la
@@ -35,6 +35,18 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Create docker-compose.yml
+        run: |
+          cat <<EOF > docker-compose.yml
+          version: '3.8'
+          services:
+            app:
+              image: ${{ secrets.DOCKER_USERNAME }}/nodejs-app:latest
+              ports:
+                - "3000:3000"
+          EOF
+          cat docker-compose.yml  # Verify content
 
       - name: Deploy
         run: |
