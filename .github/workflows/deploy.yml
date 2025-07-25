@@ -30,9 +30,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Pull and Deploy
         run: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/nodejs-app:latest
-          docker-compose down
-          docker-compose up -d --build
+           docker pull ${{ secrets.DOCKER_USERNAME }}/nodejs-app:latest
+           docker compose down  # Changed from docker-compose
+           docker compose up -d --build  # Changed from docker-compose
